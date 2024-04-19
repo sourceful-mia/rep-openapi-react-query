@@ -1,0 +1,194 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Project": {
+				"properties": {
+					"description": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"description",
+					"name",
+					"id"
+				],
+				"type": "object"
+			},
+			"ApiInternalError": {
+				"type": "string"
+			},
+			"ApiResponseListMeta": {
+				"properties": {
+					"total": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"total"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponseList_Project_": {
+				"properties": {
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/Project"
+						},
+						"type": "array"
+					},
+					"errors": {
+						"items": {
+							"$ref": "#/components/schemas/ApiInternalError"
+						},
+						"type": "array"
+					},
+					"meta": {
+						"$ref": "#/components/schemas/ApiResponseListMeta"
+					}
+				},
+				"required": [
+					"data",
+					"errors"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_Project_": {
+				"properties": {
+					"data": {
+						"$ref": "#/components/schemas/Project"
+					},
+					"errors": {
+						"items": {
+							"$ref": "#/components/schemas/ApiInternalError"
+						},
+						"type": "array"
+					},
+					"meta": {
+						"type": "number",
+						"enum": [
+							null
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"data",
+					"errors"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ProjectCreateParams": {
+				"properties": {
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "projects-api",
+		"version": "1.0.0",
+		"description": "Projects backend for frontend",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/v1/projects": {
+			"get": {
+				"operationId": "GetProjects",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponseList_Project_"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateProject",
+				"responses": {
+					"201": {
+						"description": "Created"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ProjectCreateParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/projects/{id}": {
+			"get": {
+				"operationId": "GetProject",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Project_"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/projects-api"
+		}
+	]
+}

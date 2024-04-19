@@ -1,0 +1,17 @@
+{
+  "name": "oa-rq-rep",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "codegen": "openapi-rq -i swagger.json -c axios -o src/generated/api"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@7nohe/openapi-react-query-codegen": "^1.0.6",
+    "axios": "^1.6.8",
+    "typescript": "^5.4.5"
+  }
+}
